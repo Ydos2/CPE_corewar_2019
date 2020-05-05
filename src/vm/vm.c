@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2020
-** Corewar
+** vm
 ** File description:
-** Main function
+** vm
 */
 
-int main(int argc, char **argv)
+#include "vm.h"
+
+int vm_start(void)
 {
-
-
     return (0);
 }
