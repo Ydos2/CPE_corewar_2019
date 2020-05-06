@@ -7,7 +7,9 @@
 
 #include "vm.h"
 
-int vm_start(void)
+int vm_start(arena_t *arena, champion_t *champion)
 {
+    (void)arena;
+    (void)champion;
     return (0);
 }

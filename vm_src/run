@@ -1,0 +1,2 @@
+#!/bin/bash
+./corewar ../champion/waggg.asm -n 3 ../champion/banane.asm -n 1 ../champion/idk.asm ../champion/corona.asm
