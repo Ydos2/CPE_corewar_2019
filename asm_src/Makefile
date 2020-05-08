@@ -8,7 +8,8 @@
 CC        =    gcc
 
 SRC     =	src/op.c		\
-			src/asm.c
+			src/asm.c		\
+			src/read_file.c \
 
 OBJ     =	$(SRC:.c=.o) 			\
 
