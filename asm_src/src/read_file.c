@@ -5,9 +5,9 @@
 ** Main function
 */
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "my.h"
 
 char **stock_line_in_array(char **last_stock, char *line, int line_size)
 {
@@ -34,7 +34,10 @@ char **read_from_stream(FILE *stream)
     char **map = NULL;
     size_t size = 0;
 
-    while ((size = getline(&buffer, &size, stream)) != -1) {
+    while (size != (size_t)-1) {
+        size = getline(&buffer, &size, stream);
+        if (size == (size_t)-1)
+            break;
         map = stock_line_in_array(map, buffer, size);
         free(buffer);
         buffer = NULL;
@@ -50,7 +53,7 @@ char **read_file(char *path)
 
     stream = fopen(path, "r");
     if (stream == NULL) {
-        my_put_error("File couldn't be opened\n");
+        write(2, "File couldn't be opened\n", 25);
         return (NULL);
     }
     map = read_from_stream(stream);
