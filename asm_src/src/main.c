@@ -46,5 +46,5 @@ int main(int ac, char **av)
 {
     if (draw_help(ac, av) == 1)
         return (0);
-    return (asm_start());
+    return (asm_start(av[1]));
 }
