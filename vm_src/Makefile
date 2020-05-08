@@ -9,9 +9,11 @@ CC		=	gcc
 
 SRC     =	src/op.c								\
 			src/vm.c								\
-			src/util_function.c 					\
+			src/tools/util_function.c 				\
 			src/arena.c								\
 			src/champion.c							\
+			src/tools/my_xmalloc.c					\
+			src/tools/my_memset.c					\
 			src/machine_functions/my_add.c			\
 			src/machine_functions/my_aff.c			\
 			src/machine_functions/my_and.c			\
@@ -27,7 +29,15 @@ SRC     =	src/op.c								\
 			src/machine_functions/my_sti.c			\
 			src/machine_functions/my_sub.c			\
 			src/machine_functions/my_xor.c			\
-			src/machine_functions/my_zjump.c
+			src/machine_functions/my_zjump.c		\
+			src/print_arena_carac.c					\
+			src/tools/my_putnbr.c					\
+			src/tools/my_getnbr.c					\
+			src/tools/my_xopen.c					\
+			src/process.c							\
+			src/id.c								\
+			src/header.c							\
+			src/instruction.c
 
 OBJ     =	$(SRC:.c=.o) 			\
 

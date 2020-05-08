@@ -6,7 +6,6 @@
 */
 
 #include <unistd.h>
-#include "op.h"
 #include "vm.h"
 
 static int draw_help(int ac, char **av)
@@ -56,7 +55,7 @@ int main(int ac, char **av, char **env)
     champion = init_champion(champion, ac, av);
     arena = init_arena(arena, champion);
     write(1, "The map is :\n", 13);
-    print_arena_propertis(arena);
+    print_arena_carac(arena);
     write(1, "The program is running\n", 23);
     vm_start(arena, champion);
     return (0);
