@@ -35,7 +35,7 @@ static void battle(arena_t *arena, champion_t *champion)
     int nb_champion = -1;
     int i;
 
-    while (nb_champion++ < champion->nbr_champion) {
+    while (++nb_champion < champion->nbr_champion) {
         i = -1;
         while (++i < champion->header[nb_champion].prog_size) {
             arena->arena[i + champion->process[nb_champion]->pc_pos]

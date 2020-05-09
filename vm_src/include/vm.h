@@ -45,13 +45,15 @@ typedef struct arena
     int cycle_to_die;
     int total_cycle;
     int total_live;
+    int nbr_live;
     int (*func[16])(struct arena *arena,
         process_t *process,
         int id, int pc_pos);
 } arena_t;
 
 // vm.c
-int vm_start(arena_t *arena, champion_t *champion);
+void launch_process(process_t *process, arena_t *arena, int id);
+int vm_start(arena_t *arena);
 
 // util_function.c
 int my_strcmp(char const *s1, char const *s2);
@@ -83,6 +85,9 @@ int my_putnbr(int nb);
 // my_getnbr.c
 int my_getnbr(const char *str);
 
+// my_putstr.c
+int my_putstr(char const *str);
+
 // process.c
 process_t *initialise_process(int pos, int id);
 void free_process(process_t *process);
@@ -98,5 +103,18 @@ int is_a_id_request(char *str);
 
 // instruction.c
 char *get_instruction(int fd, int size);
+
+// end_vm.c
+void end_vm(arena_t *arena);
+
+// refresh_loop.c
+void pick_function(arena_t *arena, process_t *proc, int id);
+void refresh_process(process_t *proc);
+void refresh_process_loop(arena_t *arena);
+
+// maths.c
+//t_choix make_choix(int pc, char modu, char place);
+int circle(int pos, int incr);
+int mod(int nbr, int modulo);
 
 #endif /* !VM_H_ */

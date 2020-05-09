@@ -34,10 +34,14 @@ SRC     =	src/op.c								\
 			src/tools/my_putnbr.c					\
 			src/tools/my_getnbr.c					\
 			src/tools/my_xopen.c					\
+			src/tools/my_putstr.c					\
 			src/process.c							\
 			src/id.c								\
 			src/header.c							\
-			src/instruction.c
+			src/refresh_loop.c						\
+			src/maths.c								\
+			src/instruction.c						\
+			src/end_vm.c
 
 OBJ     =	$(SRC:.c=.o) 			\
 
@@ -45,7 +49,7 @@ MAIN_SRC    =    src/main.c			\
 
 MAIN_OBJ    =    $(MAIN_SRC:.c=.o)	\
 
-CFLAGS    =    -I./include -Wextra -W -Wall -pedantic
+CFLAGS    =    -I./include -Wextra -W -Wall -pedantic -g3
 
 TARGET    =		corewar		\
 

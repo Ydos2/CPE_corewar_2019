@@ -57,6 +57,6 @@ int main(int ac, char **av, char **env)
     write(1, "The map is :\n", 13);
     print_arena_carac(arena);
     write(1, "The program is running\n", 23);
-    vm_start(arena, champion);
+    vm_start(arena);
     return (0);
 }
