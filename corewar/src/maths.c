@@ -22,13 +22,3 @@ int circle(int pos, int incr)
     pos = mod(pos, MEM_SIZE);
     return (pos);
 }
-
-/*t_choix make_choix(int pc, char modu, char place)
-{
-    t_choix	result;
-
-    result.pc = pc;
-    result.modu = modu;
-    result.place = place;
-    return (result);
-}*/

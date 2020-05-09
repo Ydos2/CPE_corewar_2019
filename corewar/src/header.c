@@ -22,8 +22,10 @@ header_t get_header(int fd)
 {
     header_t header;
 
-    if (read(fd, &header, sizeof(header_t)) < 0)
-        write(2, "couldn't read one of the requested champion\n", 44);
+    if (read(fd, &header, sizeof(header_t)) < 0) {
+        write(2, "Couldn't read one of the requested champion\n", 44);
+        exit(84);
+    }
     header.magic = reverse_int(header.magic);
     header.prog_size = reverse_int(header.prog_size);
     return (header);

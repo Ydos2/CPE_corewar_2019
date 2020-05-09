@@ -29,7 +29,7 @@ void launch_process(process_t *process, arena_t *arena, int id)
         if (arena->nbr_live >= NBR_LIVE) {
             refresh_process_loop(arena);
             if (how_much_alive(arena->champion) < 2)
-                vm_start(arena);
+                end_vm(arena);
             arena->cycle = 0;
             arena->cycle_to_die -= CYCLE_DELTA;
         }
@@ -40,7 +40,7 @@ void launch_process(process_t *process, arena_t *arena, int id)
     }
 }
 
-static void loop_champ(arena_t *arena)
+static void loop_champion(arena_t *arena)
 {
     int i = -1;
 
@@ -56,7 +56,7 @@ int vm_start(arena_t *arena)
     while (arena->cycle_to_die > 0) {
         arena->cycle = 0;
         while (arena->cycle < arena->cycle_to_die) {
-            loop_champ(arena);
+            loop_champion(arena);
             arena->total_cycle++;
             arena->cycle++;
         }

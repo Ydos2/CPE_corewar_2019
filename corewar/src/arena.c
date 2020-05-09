@@ -33,10 +33,8 @@ static void init_function_machine(arena_t *arena)
 static void battle(arena_t *arena, champion_t *champion)
 {
     int nb_champion = -1;
-    int i;
 
-    while (++nb_champion < champion->nbr_champion) {
-        i = -1;
+    for (int i = -1; ++nb_champion < champion->nbr_champion; i = -1) {
         while (++i < champion->header[nb_champion].prog_size) {
             arena->arena[i + champion->process[nb_champion]->pc_pos]
                 = champion->instruction[nb_champion][i];
@@ -58,6 +56,7 @@ arena_t *init_arena(arena_t *arena, champion_t *champion)
     arena->cycle_to_die = CYCLE_TO_DIE;
     arena->total_cycle = 0;
     arena->total_live = 0;
+    arena->nbr_live = 0;
     init_function_machine(arena);
     return (arena);
 }

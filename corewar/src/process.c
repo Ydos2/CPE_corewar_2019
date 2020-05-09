@@ -50,26 +50,34 @@ void free_process(process_t *process)
     }
 }
 
-void load_process(champion_t *champion, int ac, char **av)
+static int process_loop(champion_t *champion, int j)
+{
+    if (champion->header[j].prog_size > MEM_SIZE / 4) {
+        write(2, "Error, size of the program is too big\n", 38);
+        return (84);
+    }
+    return (0);
+}
+
+int load_process(champion_t *champion, int ac, char **av)
 {
     int i = -1;
     int j = (i = -1) * 0;
-    int read_id_needed;
-    int fd;
 
-    while (++i < ac) {
+    for (int read_id_needed = 0, fd = 0, rnt = 0; ++i < ac;) {
         i += (read_id_needed = is_a_id_request(av[i])) * 2;
         if (is_a_champion_path(av[i])) {
             fd = my_xopen(av[i]);
             champion->id_champion[j] = get_id(&read_id_needed, i, av);
             champion->header[j] = get_header(fd);
-            if (champion->header[j].prog_size > MEM_SIZE / 4)
-                write(2, "Error, size of the program is too big\n", 38);
+            rnt = process_loop(champion, j);
             champion->instruction[j] = get_instruction
                 (fd, champion->header[j].prog_size);
             close(fd);
             j++;
         }
+        if (rnt == 84)
+            return (84);
     }
     check_id(champion);
 }

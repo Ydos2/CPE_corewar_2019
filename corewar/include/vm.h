@@ -91,7 +91,7 @@ int my_putstr(char const *str);
 // process.c
 process_t *initialise_process(int pos, int id);
 void free_process(process_t *process);
-void load_process(champion_t *champion, int ac, char **av);
+int load_process(champion_t *champion, int ac, char **av);
 
 // header.c
 header_t get_header(int fd);

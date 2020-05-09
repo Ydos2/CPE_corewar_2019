@@ -47,6 +47,7 @@ champion_t *init_champion(champion_t *champion, int ac, char **av)
         * (champion->nbr_champion));
     champion->process = my_xmalloc(sizeof(process_t *)
         * (champion->nbr_champion));
-    load_process(champion, ac, av);
+    if (load_process(champion, ac, av) == 84)
+        exit(84);
     return (champion);
 }
