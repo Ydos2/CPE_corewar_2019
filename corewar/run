@@ -1,0 +1,2 @@
+#!/bin/bash
+./corewar ../champion/waggg.cor -n 3 ../champion/banane.cor -n 1 ../champion/idk.cor ../champion/corona.cor

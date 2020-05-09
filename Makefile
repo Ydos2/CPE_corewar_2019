@@ -22,28 +22,24 @@ goodbye:
 	@echo -ne "\e[0m\n"
 
 $(ASM_NAME):
-	@make re -C asm_src/
-	@cp ./asm_src/asm ./ -rf
+	@make re -C asm/
 
 $(VM_NAME):
-	@make re -C vm_src/
-	@cp ./vm_src/corewar ./ -rf
+	@make re -C corewar/
 
 clean:
-	@make clean -C asm_src
-	@make clean -C vm_src
+	@make clean -C asm
+	@make clean -C corewar
 
 fclean:			goodbye
-	@make fclean -C asm_src
-	@make fclean -C vm_src
-	@rm -rf asm
-	@rm -rf corewar
+	@make fclean -C asm
+	@make fclean -C corewar
 
 re:		fclean all ## Clean then compile
 
 valgrind:	fclean	all ## Launch valgrind
-	@make valgrind -C asm_src
-	@make valgrind -C vm_src
+	@make valgrind -C asm
+	@make valgrind -C corewar
 
 help: ## Help for the Makefile
 	@cat $(MAKEFILE_LIST) | sed -En 's/^([a-zA-Z_-]+)\s*:.*##\s?(.*)/\1 "\2"/p' | xargs printf "\033[32m%-30s\033[0m %s\n"
