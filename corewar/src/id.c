@@ -41,20 +41,25 @@ static int is_id_taken(int *id_tab, int id, int size)
     return (0);
 }
 
+static int loop_taken(champion_t *champion, int i, int id)
+{
+    while (is_id_taken(champion->id_champion,
+        ++id, champion->nbr_champion));
+    champion->id_champion[i] = id;
+    return (id);
+}
+
 void check_id(champion_t *champion)
 {
     int i = -1;
     int id = -1;
 
     while (++i < champion->nbr_champion) {
-        if (champion->id_champion[i] == -1) {
-            while (is_id_taken
-                (champion->id_champion, ++id, champion->nbr_champion))
-                champion->id_champion[i] = id;
-        }
+        if (champion->id_champion[i] == -1)
+            id = loop_taken(champion, i, id);
     }
     i = -1;
     while (++i < champion->nbr_champion)
-        champion->process[i] = initialise_process
-            (MEM_SIZE / champion->nbr_champion * i, champion->id_champion[i]);
+        champion->process[i] = initialise_process(MEM_SIZE /
+        champion->nbr_champion * i, champion->id_champion[i]);
 }
