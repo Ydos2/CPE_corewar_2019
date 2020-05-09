@@ -22,11 +22,13 @@ int is_a_champion_path(char *str)
 static int count_champ(int ac, char **av)
 {
     int out = 0;
+    int i = 0;
 
-    for (int i = 0; i < ac; i++)
+    while (i < ac) {
         if (is_a_champion_path(av[i]))
             out++;
-    return (out);
+        i++;
+    }
 }
 
 champion_t *init_champion(champion_t *champion, int ac, char **av)

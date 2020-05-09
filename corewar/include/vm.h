@@ -113,8 +113,11 @@ void refresh_process(process_t *proc);
 void refresh_process_loop(arena_t *arena);
 
 // maths.c
-//t_choix make_choix(int pc, char modu, char place);
 int circle(int pos, int incr);
 int mod(int nbr, int modulo);
+
+// my_putcolor.c
+int	my_putcolor(char *str, int i);
+void color(int i);
 
 #endif /* !VM_H_ */

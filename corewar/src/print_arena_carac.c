@@ -38,27 +38,28 @@ static void print_arena(arena_t *arena, int i)
             write(1, " ", 1);
             break;
         case 0:
-            write(1, "#1", 2);
+            my_putcolor("#1", 1);
             my_putnbr(arena->carac[i - 1]);
             break;
         case 1:
-            write(1, "#2", 2);
+            my_putcolor("#2", 1);
             my_putnbr(arena->carac[i - 1]);
             break;
         case 2:
-            write(1, "#3", 2);
+            my_putcolor("#3", 1);
             my_putnbr(arena->carac[i - 1]);
             break;
         case 3:
-            write(1, "#4", 2);
+            my_putcolor("#4", 1);
             my_putnbr(arena->carac[i - 1]);
     }
+    color(-1);
 }
 
 void print_arena_carac(arena_t *arena)
 {
     print_start();
-    for (int i = 0, j = 1; i++ <= MEM_SIZE;) {
+    for (int i = 0, j = 1; ++i <= MEM_SIZE;) {
         print_arena(arena, i);
         if (i % (128 * j) == 0) {
             j++;

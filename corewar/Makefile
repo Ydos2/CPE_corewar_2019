@@ -41,6 +41,7 @@ SRC     =	src/op.c								\
 			src/refresh_loop.c						\
 			src/maths.c								\
 			src/instruction.c						\
+			src/tools/my_putcolor.c					\
 			src/end_vm.c
 
 OBJ     =	$(SRC:.c=.o) 			\

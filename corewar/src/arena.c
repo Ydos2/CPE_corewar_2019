@@ -32,15 +32,18 @@ static void init_function_machine(arena_t *arena)
 
 static void battle(arena_t *arena, champion_t *champion)
 {
-    int nb_champion = -1;
+    int			nb_champ;
+    int			i;
 
-    for (int i = -1; ++nb_champion < champion->nbr_champion; i = -1) {
-        while (++i < champion->header[nb_champion].prog_size) {
-            arena->arena[i + champion->process[nb_champion]->pc_pos]
-                = champion->instruction[nb_champion][i];
-            arena->carac[i + champion->process[nb_champion]->pc_pos]
-                = champion->id_champion[nb_champion];
-        }
+    nb_champ = -1;
+    while (++nb_champ < champion->nbr_champion)
+    {
+        i = -1;
+        while (++i < champion->header[nb_champ].prog_size)
+    {
+        arena->arena[i + champion->process[nb_champ]->pc_pos] = champion->instruction[nb_champ][i];
+        arena->carac[i + champion->process[nb_champ]->pc_pos] = champion->id_champion[nb_champ];
+    }
     }
 }
 
