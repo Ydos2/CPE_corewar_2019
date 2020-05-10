@@ -25,8 +25,12 @@ void my_put_nbr(int nbr, int file_descr);
 FILE *open_stream(char *filename);
 
 // read_file.c
+void destroy_string_array(char **string_array);
 void destroy_file(char ***file);
 char ***get_file(char *filename);
+
+// parse_string_array.c
+char ***parse_string_array(char **string_array);
 
 /*           ERROR HANDLING        */
 

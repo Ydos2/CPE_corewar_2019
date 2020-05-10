@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 #include <sys/stat.h>
-       #include <fcntl.h>
+#include <fcntl.h>
 #include "op.h"
 #include "asm.h"
 
@@ -34,10 +34,10 @@ int main(int ac, char **av)
         return (0);
     if (ac != 2)
         return (84);
-    asm_file = get_file(av[1]); // TODO
+    asm_file = get_file(av[1]);
     if (!asm_file)
         return (84);
-    return_value = translate_asm_file(asm_file, av[1]); // TODO
+    return_value = translate_asm_file(asm_file, av[1]);
     destroy_file(asm_file);
     return (return_value);
 }

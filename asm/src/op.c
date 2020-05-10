@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** op
+** CPE_corewar_2019
 ** File description:
 ** op
 */

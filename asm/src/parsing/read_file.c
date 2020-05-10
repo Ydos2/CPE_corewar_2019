@@ -10,21 +10,18 @@
 #include <stdlib.h>
 #include "asm.h"
 
-void destroy_file(char ***file)
-{
-    for (int i = 0; file[i]; i++) {
-        for (int j = 0; file[i][j]; j++)
-            free(file[i][j]);
-        free(file[i]);
-    }
-    free(file);
-}
-
 void destroy_string_array(char **string_array)
 {
     for (int i = 0; string_array[i]; i++)
         free(string_array[i]);
     free(string_array);
+}
+
+void destroy_file(char ***file)
+{
+    for (int i = 0; file[i]; i++)
+        destroy_string_array(file[i]);
+    free(file);
 }
 
 static char **store_line_in_array(char **last_stock, char *line, int line_size)
@@ -77,7 +74,7 @@ char ***get_file(char *filename)
     fclose(stream);
     if (!string_array)
         return (NULL);
-    file = parse_string_array(string_array); // TODO
+    file = parse_string_array(string_array);
     destroy_string_array(string_array);
     return (file);
 }
