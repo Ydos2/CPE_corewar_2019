@@ -32,24 +32,20 @@ static void init_function_machine(arena_t *arena)
 
 static void battle(arena_t *arena, champion_t *champion)
 {
-    int			nb_champ;
-    int			i;
+    int nb_champ = -1;
 
-    nb_champ = -1;
-    while (++nb_champ < champion->nbr_champion)
-    {
-        i = -1;
-        while (++i < champion->header[nb_champ].prog_size)
-    {
-        arena->arena[i + champion->process[nb_champ]->pc_pos] = champion->instruction[nb_champ][i];
-        arena->carac[i + champion->process[nb_champ]->pc_pos] = champion->id_champion[nb_champ];
-    }
+    for (int i = 0; ++nb_champ < champion->nbr_champion; i = 0) {
+        for (; i < champion->header[nb_champ].prog_size; i++) {
+            arena->arena[i + champion->process[nb_champ]->pc_pos]
+                = champion->instruction[nb_champ][i];
+            arena->carac[i + champion->process[nb_champ]->pc_pos]
+                = champion->id_champion[nb_champ];
+        }
     }
 }
 
 arena_t *init_arena(arena_t *arena, champion_t *champion)
 {
-    arena = malloc(sizeof(arena_t));
     arena->champion = champion;
     arena->arena = my_xmalloc(sizeof(char) * MEM_SIZE);
     my_memset(arena->arena, MEM_SIZE, 0);

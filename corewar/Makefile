@@ -42,7 +42,10 @@ SRC     =	src/op.c								\
 			src/maths.c								\
 			src/instruction.c						\
 			src/tools/my_putcolor.c					\
-			src/end_vm.c
+			src/end_vm.c							\
+			src/check.c								\
+			src/parameters.c						\
+			src/octet.c
 
 OBJ     =	$(SRC:.c=.o) 			\
 

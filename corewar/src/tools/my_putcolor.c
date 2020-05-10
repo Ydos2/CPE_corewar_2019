@@ -16,7 +16,7 @@ void color(int i)
         result = 0;
     else
         result = 30 + i;
-    my_putstr("\033[");
+    my_putstr("\033[1;");
     my_putnbr(result);
     write(1, "m", 1);
 }

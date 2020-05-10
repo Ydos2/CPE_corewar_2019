@@ -19,24 +19,21 @@ int is_a_champion_path(char *str)
     return (0);
 }
 
-static int count_champ(int ac, char **av)
+static int count_champion(int ac, char **av)
 {
     int out = 0;
-    int i = 0;
 
-    while (i < ac) {
+    for (int i = 0; i < ac; i++)
         if (is_a_champion_path(av[i]))
             out++;
-        i++;
-    }
+    return (out);
 }
 
 champion_t *init_champion(champion_t *champion, int ac, char **av)
 {
     int i = -1;
 
-    champion = malloc(sizeof(champion_t));
-    if ((champion->nbr_champion = count_champ(ac, av)) < 1) {
+    if ((champion->nbr_champion = count_champion(ac, av)) < 1) {
         write(2, "Not enought champion\n", 21);
         exit(84);
     }

@@ -21,7 +21,7 @@ static int how_much_alive(champion_t *champion)
     return (count);
 }
 
-void launch_process(process_t *process, arena_t *arena, int id)
+static void launch_process(process_t *process, arena_t *arena, int id)
 {
     process_t *tmp = process;
 
@@ -65,6 +65,5 @@ int vm_start(arena_t *arena)
             end_vm(arena);
         arena->cycle_to_die -= CYCLE_DELTA;
     }
-    end_vm(arena);
     return (0);
 }
