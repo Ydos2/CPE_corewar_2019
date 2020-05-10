@@ -7,9 +7,14 @@
 
 CC        =    gcc
 
-SRC     =	src/op.c		\
-			src/asm.c		\
-			src/read_file.c \
+SRC     =	src/op.c								\
+			src/asm_utils.c 						\
+			src/parsing/read_file.c 				\
+			src/parsing/open_stream.c 				\
+			src/error_handling/check_asm_line.c 	\
+			src/error_handling/check_argument.c 	\
+			src/conversion/translate_asm.c 			\
+
 
 OBJ     =	$(SRC:.c=.o) 			\
 
