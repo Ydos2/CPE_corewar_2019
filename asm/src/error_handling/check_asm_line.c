@@ -7,15 +7,6 @@
 
 #include "asm.h"
 
-int is_label_char(char c)
-{
-    for (int i = 0; LABEL_CHARS[i]; i++) {
-        if (c == LABEL_CHARS[i])
-            return (1);
-    }
-    return (0);
-}
-
 static int is_valid_label(char *arg)
 {
     for (int i = 0; arg[i + 1]; i++) {
@@ -42,7 +33,7 @@ static int check_nbr_of_args(int op_index, char **line)
 {
     int nbr_args = 0;
 
-    for (int i = 1; line[i]; i++, nbr_args++);
+    for (int i = 1; line[i] && line[i][0] != COMMENT_CHAR; i++, nbr_args++);
     if (op_tab[op_index].nbr_args != nbr_args)
         return (84);
     return (0);
@@ -52,14 +43,19 @@ int is_valid_asm_line(char **line)
 {
     int op_index = 0;
 
-    if (is_valid_label(line[0]))
+    if (line[0][0] == COMMENT_CHAR)
+        return (1);
+    if (is_valid_label(line[0])) {
+        if (!line[1] || line[1][0] == COMMENT_CHAR)
+            return (1);
         line++;
+    }
     op_index = get_op_index_by_name(line[0]);
     if (op_index == -1)
         return (0);
     if (check_nbr_of_args(op_index, line) == 84)
         return (0);
-    for (int i = 1; line[i]; i++) {
+    for (int i = 1; line[i] && line[i][0] != COMMENT_CHAR; i++) {
         if (!is_valid_argument(op_index, line[i], i - 1))
             return (0);
     }

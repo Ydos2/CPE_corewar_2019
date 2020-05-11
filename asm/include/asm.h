@@ -21,6 +21,13 @@ void my_put_nbr(int nbr, int file_descr);
 
 /*           PARSING               */
 
+// parsing_utils.c
+int is_label_char(char c);
+int is_separator(char c, char *separators);
+void destroy_string_array(char **string_array);
+void destroy_file(char ***file);
+int strcmp_until(char *str1, char *str2, char end);
+
 // open_stream.c
 FILE *open_stream(char *filename);
 
@@ -33,6 +40,9 @@ char ***get_file(char *filename);
 char ***parse_string_array(char **string_array);
 
 /*           ERROR HANDLING        */
+
+// check_asm_file.c
+int is_valid_asm_file(char ***asm_file, header_t *header);
 
 // check_asm_line.c
 int is_label_char(char c);

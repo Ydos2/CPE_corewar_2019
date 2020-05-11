@@ -9,9 +9,11 @@ CC        =    gcc
 
 SRC     =	src/op.c								\
 			src/asm_utils.c 						\
+			src/parsing/parsing_utils.c 			\
 			src/parsing/open_stream.c 				\
 			src/parsing/read_file.c 				\
 			src/parsing/parse_string_array.c 		\
+			src/error_handling/check_asm_file.c 	\
 			src/error_handling/check_asm_line.c 	\
 			src/error_handling/check_argument.c 	\
 			src/conversion/translate_asm.c 			\

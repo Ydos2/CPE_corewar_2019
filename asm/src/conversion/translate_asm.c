@@ -13,16 +13,25 @@ static int translate_asm_line(char **line, int cor_fd)
     return (0);
 }
 
+static void init_header(header_t *header)
+{
+    header->magic = 0;
+    header->prog_size = 0;
+    for (int i = 0; i <= PROG_NAME_LENGTH; i++)
+        header->prog_name[i] = 0;
+    for (int i = 0; i <= COMMENT_LENGTH; i++)
+        header->comment[i] = 0;
+}
+
 int translate_asm_file(char ***asm_file, char *filename)
 {
+    header_t header;
+
+    init_header(&header);
+    if (!is_valid_asm_file(asm_file, &header))
+        return (84);
     for (int i = 0; asm_file[i]; i++) {
-        if (!is_valid_asm_line(asm_file[i])) {
-            write(2, "Error : invalid instruction on line ", 37);
-            my_put_nbr(i + 1, 2);
-            write(2, ".\n", 2);
-            return (84);
-        } //else
-            //translate_asm_line(asm_file[i], cor_fd);
+        // translate_asm_line(asm_file[i], cor_fd);
     }
     return (0);
 }
