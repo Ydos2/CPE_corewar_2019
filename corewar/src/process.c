@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include "vm.h"
 
-static void create_registre(process_t *process, int id)
+static void create_register(process_t *process, int id)
 {
     int pos = 0;
 
@@ -30,7 +30,7 @@ process_t *initialise_process(int pos, int id)
     proc->pc_pos = pos;
     proc->cycle = 0;
     proc->carry = 0;
-    create_registre(proc, id);
+    create_register(proc, id);
     proc->next = NULL;
     proc->child = NULL;
     return (proc);

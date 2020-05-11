@@ -138,7 +138,12 @@ int take_what(char *arena, int pos,
 
 // octet.c
 int place_to_jump(char arg, char place);
+int octet_to_read(char param, int to_read);
 char this_octet(char param, int to_read);
 int octet_to_r(char arg);
+
+// register.c
+process_t *add_child(process_t *father);
+void cpy_register(process_t *child, process_t *parent);
 
 #endif /* !VM_H_ */
