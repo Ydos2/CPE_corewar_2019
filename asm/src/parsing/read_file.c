@@ -61,13 +61,6 @@ char ***get_file(char *filename)
     if (!string_array)
         return (NULL);
     file = parse_string_array(string_array);
-
-for (int i = 0; file[i]; i++) {
-    for (int j = 0; file[i][j]; j++)
-        printf("[%s] ", file[i][j]);
-    printf("\n");
-}
-
     destroy_string_array(string_array);
     return (file);
 }

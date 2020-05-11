@@ -21,7 +21,7 @@ void pick_function(arena_t *arena, process_t *proc, int id)
         proc->cycle--;
 }
 
-void refresh_process(process_t *proc)
+static void refresh_process(process_t *proc)
 {
     process_t *tmp = proc;
 
@@ -36,9 +36,7 @@ void refresh_process(process_t *proc)
 
 void refresh_process_loop(arena_t *arena)
 {
-    int i = -1;
-
-    while (++i < arena->champion->nbr_champion)
+    for (int i = 0; i < arena->champion->nbr_champion; i++)
         refresh_process(arena->champion->process[i]);
     arena->nbr_live = 0;
 }

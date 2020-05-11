@@ -51,8 +51,14 @@ typedef struct arena
         int id, int pc_pos);
 } arena_t;
 
+typedef struct choose
+{
+    int pc;
+    char modu;
+    char place;
+} choose_t;
+
 // vm.c
-void launch_process(process_t *process, arena_t *arena, int id);
 int vm_start(arena_t *arena);
 
 // util_function.c
@@ -109,15 +115,30 @@ void end_vm(arena_t *arena);
 
 // refresh_loop.c
 void pick_function(arena_t *arena, process_t *proc, int id);
-void refresh_process(process_t *proc);
 void refresh_process_loop(arena_t *arena);
 
 // maths.c
 int circle(int pos, int incr);
 int mod(int nbr, int modulo);
+choose_t choose(int pc, char modu, char place);
 
 // my_putcolor.c
 int	my_putcolor(char *str, int i);
 void color(int i);
+
+// check.c
+int check_arg(int funct, int pos, char arg);
+int check_mult_args(char *arena, int fun, int pos, int size);
+
+// parameters.c
+int take_param(char *arena, int pos, int bit);
+void put_param(arena_t *arena, int pos, int id, int nbr);
+int take_what(char *arena, int pos,
+    choose_t choix, int *reg);
+
+// octet.c
+int place_to_jump(char arg, char place);
+char this_octet(char param, int to_read);
+int octet_to_r(char arg);
 
 #endif /* !VM_H_ */

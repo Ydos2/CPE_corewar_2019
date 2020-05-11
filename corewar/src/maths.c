@@ -22,3 +22,13 @@ int circle(int pos, int incr)
     pos = mod(pos, MEM_SIZE);
     return (pos);
 }
+
+choose_t choose(int pc, char modu, char place)
+{
+    choose_t nbr;
+
+    nbr.pc = pc;
+    nbr.modu = modu;
+    nbr.place = place;
+    return (nbr);
+}

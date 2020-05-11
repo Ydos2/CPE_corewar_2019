@@ -32,12 +32,9 @@ int get_id(int *read_id_needed, int i, char **av)
 
 static int is_id_taken(int *id_tab, int id, int size)
 {
-    int i = -1;
-
-    while (++i < size) {
+    for (int i = 0; i < size; i++)
         if (id_tab[i] == id)
             return (1);
-    }
     return (0);
 }
 

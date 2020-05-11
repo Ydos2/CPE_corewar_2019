@@ -80,4 +80,5 @@ int load_process(champion_t *champion, int ac, char **av)
             return (84);
     }
     check_id(champion);
+    return (0);
 }
