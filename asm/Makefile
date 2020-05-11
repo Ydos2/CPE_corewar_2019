@@ -17,6 +17,8 @@ SRC     =	src/op.c								\
 			src/error_handling/check_asm_line.c 	\
 			src/error_handling/check_argument.c 	\
 			src/conversion/translate_asm.c 			\
+			src/conversion/translate_asm_line.c 	\
+			src/conversion/write_int_as_x_bytes.c 	\
 
 
 OBJ     =	$(SRC:.c=.o) 			\

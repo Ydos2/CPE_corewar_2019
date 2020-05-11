@@ -18,7 +18,7 @@ static int is_valid_label(char *arg)
     return (1);
 }
 
-static int get_op_index_by_name(char *name)
+int get_op_index_by_name(char *name)
 {
     if (!name)
         return (-1);
