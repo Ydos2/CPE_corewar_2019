@@ -42,7 +42,7 @@ char ***parse_string_array(char **string_array);
 /*           ERROR HANDLING        */
 
 // check_asm_file.c
-int is_valid_asm_file(char ***asm_file, header_t *header);
+int is_valid_asm_file(char ***asm_file, header_t *header, int *i);
 
 // check_asm_line.c
 int get_op_index_by_name(char *name);

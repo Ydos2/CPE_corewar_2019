@@ -47,15 +47,6 @@ static int bin_open_stream(char *filename)
     return (fd);
 }
 
-static int get_index_1st_line_of_code(char ***file)
-{
-    int index = 10;
-
-    // TODO
-
-    return (index);
-}
-
 int translate_asm_file(char ***asm_file, char *filename)
 {
     header_t header;
@@ -64,12 +55,11 @@ int translate_asm_file(char ***asm_file, char *filename)
     int i = 0;
 
     init_header(&header);
-    if (!is_valid_asm_file(asm_file, &header))
+    if (!is_valid_asm_file(asm_file, &header, &i))
         return (84);
     fd = bin_open_stream(filename);
     if (fd == -1)
         return (84);
-    i = get_index_1st_line_of_code(asm_file);
     if (translate_header(&header, &(asm_file[i]), fd) == 84) {
         close(fd);
         return (84);

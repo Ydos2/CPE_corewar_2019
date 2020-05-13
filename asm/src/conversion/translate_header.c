@@ -57,6 +57,7 @@ static int get_prog_size(char ***asm_file)
 {
     int prog_size = 0;
 
+    // TODO : store labels ?
     for (int i = 0; asm_file[i]; i++)
         prog_size += get_line_size(asm_file[i]);
     return (prog_size);

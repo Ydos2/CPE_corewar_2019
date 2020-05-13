@@ -62,18 +62,19 @@ static int is_valid_header(header_t *header, char ***asm_file, int *i)
     return (header->prog_name[0] && header->comment[0]);
 }
 
-int is_valid_asm_file(char ***asm_file, header_t *header)
+int is_valid_asm_file(char ***asm_file, header_t *header, int *i)
 {
-    int i = 0;
+    int i_copy = 0;
 
-    if (!is_valid_header(header, asm_file, &i)) {
+    if (!is_valid_header(header, asm_file, i)) {
         write(2, "Error : invalid header.\n", 24);
         return (0);
     }
-    for (; asm_file[i]; i++) {
-        if (!is_valid_asm_line(asm_file[i])) {
+    i_copy = *i;
+    for (; asm_file[i_copy]; i_copy++) {
+        if (!is_valid_asm_line(asm_file[i_copy])) {
             write(2, "Error : invalid instruction on line ", 37);
-            my_put_nbr(i + 1, 2);
+            my_put_nbr(i_copy + 1, 2);
             write(2, ".\n", 2);
             return (0);
         }
