@@ -12,10 +12,14 @@ static char *get_str_until(char **str, char *separators)
 {
     char *new_str = NULL;
     int len = 0;
-    char separators2[3] = {' ', ',', 0};
+    char separators2[4] = {' ', ',', '\t', 0};
+    int is_comment = 0;
 
-    for (; is_separator(**str, separators); (*str)++);
-    for (; (*str)[len] && !is_separator((*str)[len], separators); len++);
+    for (; is_separator(**str, separators2); (*str)++);
+    if (**str == COMMENT_CHAR)
+        for (; (*str)[len]; len++);
+    else
+        for (; (*str)[len] && !is_separator((*str)[len], separators); len++);
     new_str = malloc(sizeof(char) * (len + 1));
     if (!new_str)
         return (NULL);
@@ -26,16 +30,20 @@ static char *get_str_until(char **str, char *separators)
     return (new_str);
 }
 
-static int get_nbr_of_parts(char *line, char *separ)
+static int get_nbr_of_parts(char *line, char *separators)
 {
     int nbr_of_parts = 0;
+    char separators2[4] = {' ', ',', '\t', 0};
 
+    for (; is_separator(*line, separators2); line++);
+    if (*line == COMMENT_CHAR)
+        return (1);
     if (strcmp_until(line, ".name ", '"') == 0 ||
         strcmp_until(line, ".comment ", '"') == 0)
         return (2);
     for (int i = 0; line[i]; i++) {
-        if (i != 0 && is_separator(line[i], separ) &&
-            !is_separator(line[i - 1], separ))
+        if (i != 0 && is_separator(line[i], separators) &&
+            !is_separator(line[i - 1], separators))
             nbr_of_parts++;
         if (line[i] == COMMENT_CHAR) {
             nbr_of_parts = (i == 0) ? nbr_of_parts : nbr_of_parts + 1;
@@ -49,8 +57,9 @@ static int get_nbr_of_parts(char *line, char *separ)
 static char **allocate_mem_for_parsed_line(char *line, int *len)
 {
     char **parsed_line = NULL;
+    char separators[5] = {' ', ',', '\t', COMMENT_CHAR, 0};
 
-    *len = get_nbr_of_parts(line, " ,");
+    *len = get_nbr_of_parts(line, separators);
     if (*len <= 0)
         return (NULL);
     parsed_line = malloc(sizeof(char *) * (*len + 1));
@@ -61,7 +70,7 @@ static char **parse_line(char *line)
 {
     char **parsed_line = NULL;
     int len = 0;
-    char separators[4] = {' ', ',', COMMENT_CHAR, 0};
+    char separators[5] = {' ', ',', '\t', COMMENT_CHAR, 0};
 
     for (; *line == '\t' || *line == ' '; line++);
     parsed_line = allocate_mem_for_parsed_line(line, &len);
@@ -98,13 +107,13 @@ char ***parse_string_array(char **string_array)
         file[i + 1] = NULL;
     }
 
-/*printf("\n");
+printf("\n");
 for (int i = 0; file[i]; i++) {
     for (int j = 0; file[i][j]; j++)
         printf("[%s] ", file[i][j]);
     printf("\n");
 }
-printf("\n");*/
+printf("\n");
 
     return (file);
 }

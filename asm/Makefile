@@ -16,6 +16,7 @@ SRC     =	src/op.c								\
 			src/error_handling/check_asm_file.c 	\
 			src/error_handling/check_asm_line.c 	\
 			src/error_handling/check_argument.c 	\
+			src/conversion/conversion_utils.c 		\
 			src/conversion/translate_asm.c 			\
 			src/conversion/translate_header.c 		\
 			src/conversion/translate_asm_line.c 	\

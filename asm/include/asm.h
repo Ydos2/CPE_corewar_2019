@@ -58,6 +58,10 @@ int is_valid_argument(int op_index, char *arg, int arg_index);
 
 /*           CONVERSION            */
 
+// conversion_utils.c
+int is_exception(int op_index, int arg_index);
+int *current_size(void);
+
 // translate_asm.c
 int translate_asm_file(char ***asm_file, char *filename);
 
@@ -66,7 +70,7 @@ void init_header(header_t *header);
 int translate_header(header_t *header, char ***file, int fd, label_t **labels);
 
 // translate_asm_line.c
-int translate_asm_line(char **line, int fd);
+int translate_asm_line(char **line, label_t *labels, int fd);
 
 // write_int_as_x_bytes.c
 int write_int_as_x_bytes(long data, size_t size, int fd);
@@ -74,5 +78,6 @@ int write_int_as_x_bytes(long data, size_t size, int fd);
 // labels.c
 label_t *get_blank_labels(char ***asm_file);
 void add_label(label_t **labels, int index, char *line);
+int get_label_index_by_name(char *name, label_t *labels);
 
 #endif /* !ASM_H_ */

@@ -21,8 +21,7 @@ static int get_arg_size(char *argument, int op_index, int arg_index)
 {
     int size = 0;
 
-    if (op_index == 8 || (op_index == 9 && arg_index != 2) ||
-       (op_index == 10 && arg_index != 0) || op_index == 11) // do it when translating too
+    if (is_exception(op_index, arg_index))
         return (2);
     if (argument[0] == 'r')
         return (1);
@@ -52,7 +51,7 @@ static int get_line_size(char **line, label_t **labels, int prog_size)
     line++;
     if (op_index != 0 && op_index != 8 && op_index != 11 && op_index != 14)
         line_size++;
-    for (int i = 0; line[i]; i++)
+    for (int i = 0; line[i] && line[i][0] != COMMENT_CHAR; i++)
         line_size += get_arg_size(line[i], op_index, i);
     return (line_size);
 }

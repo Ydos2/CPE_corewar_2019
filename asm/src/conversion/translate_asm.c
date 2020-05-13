@@ -47,12 +47,12 @@ static int bin_open_stream(char *filename)
     return (fd);
 }
 
-static int translate_code(char ***asm_file, int fd)
+static int translate_code(char ***asm_file, label_t *labels, int fd)
 {
     int return_value = 0;
 
     for (int i = 0; asm_file[i] && return_value != 84; i++)
-        return_value = translate_asm_line(asm_file[i], fd);
+        return_value = translate_asm_line(asm_file[i], labels, fd);
     return (return_value);
 }
 
@@ -74,7 +74,7 @@ int translate_asm_file(char ***asm_file, char *filename)
         close(fd);
         return (84);
     }
-    return_value = translate_code(&(asm_file[i]), fd);
+    return_value = translate_code(&(asm_file[i]), labels, fd);
     close(fd);
     free(labels);
     return (return_value);

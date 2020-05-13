@@ -44,3 +44,12 @@ void add_label(label_t **labels, int index, char *line)
     (*labels)[end].index = index;
     (*labels)[end].name = line;
 }
+
+int get_label_index_by_name(char *name, label_t *labels)
+{
+    for (int i = 0; labels[i].name; i++) {
+        if (strcmp_until(name, labels[i].name, ':') == 0)
+            return (labels[i].index);
+    }
+    return (-1);
+}
