@@ -26,17 +26,19 @@ static int get_args_types_as_byte(char **line)
 
 static int write_index(char *arg, label_t *labels, int fd)
 {
-    int index = -1;
+    int index_label = -1;
+    int index = 0;
 
     arg += (arg[0] == DIRECT_CHAR);
     if (arg[0] == LABEL_CHAR)
-        index = get_label_index_by_name(&(arg[1]), labels);
+        index_label = get_label_index_by_name(&(arg[1]), labels);
     else
-        index = get_nbr_until(arg, 0);
-    if (index == -1)
+        index_label = get_nbr_until(arg, 0);
+    if (index_label == -1)
         return (84);
-
-printf("[%s] -> %i\n", arg, index);
+    index = index_label - (*current_size_line());
+    if (index < 0)
+        index = 65535 - (-index - 1);
     write_int_as_x_bytes(index, 2, fd);
     (*current_size()) += 2;
     return (0);

@@ -51,8 +51,10 @@ static int translate_code(char ***asm_file, label_t *labels, int fd)
 {
     int return_value = 0;
 
-    for (int i = 0; asm_file[i] && return_value != 84; i++)
+    for (int i = 0; asm_file[i] && return_value != 84; i++) {
         return_value = translate_asm_line(asm_file[i], labels, fd);
+        *current_size_line() = *current_size();
+    }
     return (return_value);
 }
 

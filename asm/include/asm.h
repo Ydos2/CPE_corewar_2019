@@ -61,6 +61,7 @@ int is_valid_argument(int op_index, char *arg, int arg_index);
 // conversion_utils.c
 int is_exception(int op_index, int arg_index);
 int *current_size(void);
+int *current_size_line(void);
 
 // translate_asm.c
 int translate_asm_file(char ***asm_file, char *filename);

@@ -7,6 +7,13 @@
 
 #include "asm.h"
 
+int *current_size_line(void)
+{
+    static int current_size_line = 0;
+
+    return (&current_size_line);
+}
+
 int *current_size(void)
 {
     static int current_size = 0;

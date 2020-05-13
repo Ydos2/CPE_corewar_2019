@@ -106,14 +106,5 @@ char ***parse_string_array(char **string_array)
         }
         file[i + 1] = NULL;
     }
-
-printf("\n");
-for (int i = 0; file[i]; i++) {
-    for (int j = 0; file[i][j]; j++)
-        printf("[%s] ", file[i][j]);
-    printf("\n");
-}
-printf("\n");
-
     return (file);
 }
