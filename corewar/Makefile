@@ -45,7 +45,8 @@ SRC     =	src/op.c								\
 			src/end_vm.c							\
 			src/check.c								\
 			src/parameters.c						\
-			src/octet.c
+			src/octet.c								\
+			src/register.c
 
 OBJ     =	$(SRC:.c=.o) 			\
 

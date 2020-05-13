@@ -16,12 +16,12 @@ void color(int i)
         result = 0;
     else
         result = 30 + i;
-    my_putstr("\033[1;");
+    my_putstr("\033[1;3;");
     my_putnbr(result);
     write(1, "m", 1);
 }
 
-int	my_putcolor(char *str, int i)
+int my_putcolor(char *str, int i)
 {
     if (str[i] >= '0' && str[i] <= '7')
         color(str[i] - 48);

@@ -18,7 +18,7 @@ char this_octet(char param, int to_read)
     return (result);
 }
 
-static int octet_to_read(char param, int to_read)
+int octet_to_read(char param, int to_read)
 {
     char arg = this_octet(param, to_read);
 
