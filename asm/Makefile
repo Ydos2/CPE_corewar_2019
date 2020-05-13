@@ -20,7 +20,7 @@ SRC     =	src/op.c								\
 			src/conversion/translate_header.c 		\
 			src/conversion/translate_asm_line.c 	\
 			src/conversion/write_int_as_x_bytes.c 	\
-
+			src/conversion/labels.c
 
 OBJ     =	$(SRC:.c=.o) 			\
 

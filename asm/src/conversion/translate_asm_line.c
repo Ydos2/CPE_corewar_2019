@@ -27,6 +27,7 @@ static int get_args_types_as_byte(char **line)
 static int write_command_argument(char *argument, int fd)
 {
     size_t size = 0;
+    int index = 0;
 
     if (argument[0] == 'r') {
         size = 1;
@@ -38,8 +39,8 @@ static int write_command_argument(char *argument, int fd)
         size = IND_SIZE;
     if (argument[0] != LABEL_CHAR)
         write_int_as_x_bytes(get_nbr_until(argument, 0), size, fd);
-    //else
-        // TODO : handle label
+    else
+        write_int_as_x_bytes(index, 2, fd); // get index value
     return (0);
 }
 

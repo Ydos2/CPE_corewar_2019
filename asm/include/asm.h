@@ -12,6 +12,11 @@
 #include <unistd.h>
 #include "op.h"
 
+typedef struct label_s {
+    int index;
+    char *name;
+} label_t;
+
 // asm_utils.c
 int my_strlen(char *str);
 int my_strcmp(char *str1, char *str2);
@@ -58,12 +63,16 @@ int translate_asm_file(char ***asm_file, char *filename);
 
 // translate_header.c
 void init_header(header_t *header);
-int translate_header(header_t *header, char ***asm_file, int fd);
+int translate_header(header_t *header, char ***file, int fd, label_t **labels);
 
 // translate_asm_line.c
 int translate_asm_line(char **line, int fd);
 
 // write_int_as_x_bytes.c
 int write_int_as_x_bytes(long data, size_t size, int fd);
+
+// labels.c
+label_t *get_blank_labels(char ***asm_file);
+void add_label(label_t **labels, int index, char *line);
 
 #endif /* !ASM_H_ */

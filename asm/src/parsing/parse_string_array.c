@@ -12,7 +12,9 @@ static char *get_str_until(char **str, char *separators)
 {
     char *new_str = NULL;
     int len = 0;
+    char separators2[3] = {' ', ',', 0};
 
+    for (; is_separator(**str, separators); (*str)++);
     for (; (*str)[len] && !is_separator((*str)[len], separators); len++);
     new_str = malloc(sizeof(char) * (len + 1));
     if (!new_str)
@@ -20,8 +22,7 @@ static char *get_str_until(char **str, char *separators)
     for (int i = 0; i < len; i++, (*str)++)
         new_str[i] = **str;
     new_str[len] = 0;
-    if (**str != COMMENT_CHAR)
-        (*str)++;
+    for (; is_separator(**str, separators2); (*str)++);
     return (new_str);
 }
 
@@ -97,11 +98,13 @@ char ***parse_string_array(char **string_array)
         file[i + 1] = NULL;
     }
 
-/*for (int i = 0; file[i]; i++) {
+/*printf("\n");
+for (int i = 0; file[i]; i++) {
     for (int j = 0; file[i][j]; j++)
         printf("[%s] ", file[i][j]);
     printf("\n");
-}*/
+}
+printf("\n");*/
 
     return (file);
 }
