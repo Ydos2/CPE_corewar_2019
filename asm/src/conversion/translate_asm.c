@@ -10,16 +10,6 @@
 #include <stdlib.h>
 #include "asm.h"
 
-static void init_header(header_t *header)
-{
-    header->magic = COREWAR_EXEC_MAGIC;
-    header->prog_size = 0;
-    for (int i = 0; i <= PROG_NAME_LENGTH; i++)
-        header->prog_name[i] = 0;
-    for (int i = 0; i <= COMMENT_LENGTH; i++)
-        header->comment[i] = 0;
-}
-
 static char *get_new_filename(char *filename)
 {
     char *new_filename = NULL;
@@ -60,6 +50,7 @@ static int bin_open_stream(char *filename)
 static int get_index_1st_line_of_code(char ***file)
 {
     int index = 10;
+
     // TODO
 
     return (index);
@@ -78,11 +69,11 @@ int translate_asm_file(char ***asm_file, char *filename)
     fd = bin_open_stream(filename);
     if (fd == -1)
         return (84);
-    if (translate_header(header, fd) == 84) {
+    i = get_index_1st_line_of_code(asm_file);
+    if (translate_header(&header, &(asm_file[i]), fd) == 84) {
         close(fd);
         return (84);
     }
-    i = get_index_1st_line_of_code(asm_file);
     for (; asm_file[i] && return_value != 84; i++)
         return_value = translate_asm_line(asm_file[i], fd);
     close(fd);

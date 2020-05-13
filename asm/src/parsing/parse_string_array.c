@@ -62,6 +62,7 @@ static char **parse_line(char *line)
     int len = 0;
     char separators[4] = {' ', ',', COMMENT_CHAR, 0};
 
+    for (; *line == '\t' || *line == ' '; line++);
     parsed_line = allocate_mem_for_parsed_line(line, &len);
     if (!parsed_line)
         return (NULL);
@@ -95,5 +96,12 @@ char ***parse_string_array(char **string_array)
         }
         file[i + 1] = NULL;
     }
+
+/*for (int i = 0; file[i]; i++) {
+    for (int j = 0; file[i][j]; j++)
+        printf("[%s] ", file[i][j]);
+    printf("\n");
+}*/
+
     return (file);
 }

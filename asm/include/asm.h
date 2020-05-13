@@ -57,7 +57,8 @@ int is_valid_argument(int op_index, char *arg, int arg_index);
 int translate_asm_file(char ***asm_file, char *filename);
 
 // translate_header.c
-int translate_header(header_t header, int fd);
+void init_header(header_t *header);
+int translate_header(header_t *header, char ***asm_file, int fd);
 
 // translate_asm_line.c
 int translate_asm_line(char **line, int fd);
