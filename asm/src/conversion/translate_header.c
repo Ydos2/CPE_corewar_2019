@@ -28,11 +28,9 @@ static int get_arg_size(char *argument)
         argument++;
     } else
         size = IND_SIZE;
-    if (argument[0] != LABEL_CHAR)
-        return (size);
-    //else
-        // TODO : handle label
-    return (0);
+    if (argument[0] == LABEL_CHAR)
+        return (2);
+    return (size);
 }
 
 static int get_line_size(char **line)
