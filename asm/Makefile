@@ -33,6 +33,12 @@ CFLAGS    =    -I./include -Wextra -W -Wall -pedantic
 
 TARGET    =		asm		\
 
+TEST_TARGET	=	test_asm
+
+SRC_TESTS	=
+
+OBJ_TESTS	=	$(SRC_TESTS:.c=.o)
+
 all: $(TARGET) ## Build the project
 
 $(TARGET): build
@@ -53,6 +59,8 @@ clean: ## Clean the useless file
 
 fclean: clean ## Clean the project
 	@rm -f $(TARGET) $(TEST_TARGET)
+	@rm -f *.gcno
+	@rm -f *.gcda
 	@printf "[\e[1;31m-RM-\e[0m] % 42s\n" $(TARGET) | tr ' ' '.'
 	@printf "[\e[1;31m-RM-\e[0m] % 42s\n" $(TEST_TARGET) | tr ' ' '.'
 	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Finished RM ▄▀▄▀▄▀\e[0m\n"
@@ -65,5 +73,11 @@ valgrind: fclean all ## Launch valgrind
 
 help: ## Help for the Makefile
 	@cat $(MAKEFILE_LIST) | sed -En 's/^([a-zA-Z_-]+)\s*:.*##\s?(.*)/\1 "\2"/p' | xargs printf "\033[32m%-30s\033[0m %s\n"
+
+tests_run:	$(SRC_TESTS)
+			rm -f *.gcno
+			rm -f *.gcda
+			gcc -o $(TEST_TARGET) $(SRC_TESTS) $(CFLAGS) --coverage -lcriterion
+			./$(TEST_TARGET)
 
 .PHONY:	all build clean fclean re tests_run re_tests valgrind help
