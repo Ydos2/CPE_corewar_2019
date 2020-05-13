@@ -56,10 +56,13 @@ int is_valid_argument(int op_index, char *arg, int arg_index);
 // translate_asm.c
 int translate_asm_file(char ***asm_file, char *filename);
 
+// translate_header.c
+int translate_header(header_t header, int fd);
+
 // translate_asm_line.c
 int translate_asm_line(char **line, int fd);
 
 // write_int_as_x_bytes.c
-int write_int_as_x_bytes(int data, size_t size, int fd);
+int write_int_as_x_bytes(long data, size_t size, int fd);
 
 #endif /* !ASM_H_ */

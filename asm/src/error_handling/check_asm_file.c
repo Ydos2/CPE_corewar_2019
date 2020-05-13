@@ -18,8 +18,8 @@ static int set_prog_name(char *name, header_t *header)
         return (84);
     if (name[0] != '"' || name[len - 1] != '"')
         return (84);
-    for (int i = 0; i < len; i++)
-        header->prog_name[i] = name[i];
+    for (int i = 1; i < len - 1; i++)
+        header->prog_name[i - 1] = name[i];
     return (0);
 }
 
@@ -34,19 +34,21 @@ static int set_prog_comment(char *comment, header_t *header)
         return (84);
     if (comment[0] != '"' || comment[len - 1] != '"')
         return (84);
-    for (int i = 0; i < len; i++)
-        header->comment[i] = comment[i];
+    for (int i = 1; i < len - 1; i++)
+        header->comment[i - 1] = comment[i];
     return (0);
 }
 
-
 static int is_valid_header(header_t *header, char ***asm_file, int *i)
 {
+    char **line = NULL;
     int return_val = 0;
 
-    for (char **line = NULL; asm_file[*i][0][0]; (*i)++) {
+    for (; !(header->prog_name[0]) || !(header->comment[0]); (*i)++) {
         line = asm_file[*i];
-        if (asm_file[*i][0][0] == COMMENT_CHAR)
+        if (!line)
+            break;
+        if (!(line[0]) || !(line[0][0]) || line[0][0] == COMMENT_CHAR)
             continue;
         if (my_strcmp(".name", line[0]) == 0)
             return_val = (line[2]) ? 84 : set_prog_name(line[1], header);
@@ -57,10 +59,7 @@ static int is_valid_header(header_t *header, char ***asm_file, int *i)
         if (return_val == 84)
             return (0);
     }
-    if (!(header->prog_name[0]) || !(header->comment[0]))
-        return (0);
-    (*i)++;
-    return (1);
+    return (header->prog_name[0] && header->comment[0]);
 }
 
 int is_valid_asm_file(char ***asm_file, header_t *header)

@@ -12,7 +12,7 @@
 
 static void init_header(header_t *header)
 {
-    header->magic = 0;
+    header->magic = COREWAR_EXEC_MAGIC;
     header->prog_size = 0;
     for (int i = 0; i <= PROG_NAME_LENGTH; i++)
         header->prog_name[i] = 0;
@@ -57,10 +57,20 @@ static int bin_open_stream(char *filename)
     return (fd);
 }
 
+static int get_index_1st_line_of_code(char ***file)
+{
+    int index = 10;
+    // TODO
+
+    return (index);
+}
+
 int translate_asm_file(char ***asm_file, char *filename)
 {
     header_t header;
     int fd = 0;
+    int return_value = 0;
+    int i = 0;
 
     init_header(&header);
     if (!is_valid_asm_file(asm_file, &header))
@@ -68,13 +78,13 @@ int translate_asm_file(char ***asm_file, char *filename)
     fd = bin_open_stream(filename);
     if (fd == -1)
         return (84);
-    // TODO : translate header
-    for (int i = 0; asm_file[i]; i++) {
-        if (translate_asm_line(asm_file[i], fd) == 84) {
-            close(fd);
-            return (84);
-        }
+    if (translate_header(header, fd) == 84) {
+        close(fd);
+        return (84);
     }
+    i = get_index_1st_line_of_code(asm_file);
+    for (; asm_file[i] && return_value != 84; i++)
+        return_value = translate_asm_line(asm_file[i], fd);
     close(fd);
-    return (0);
+    return (return_value);
 }

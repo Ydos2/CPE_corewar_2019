@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "asm.h"
 
-static int get_args_types_as_byte(char **line) // TODO : Fix it
+static int get_args_types_as_byte(char **line)
 {
     int byte[8] = {0};
     int nbr = 0;
@@ -48,8 +48,8 @@ int translate_asm_line(char **line, int fd)
     int op_index = 0;
 
     // TODO : store label if line[0] is a label ?
-    line += (line[0][my_strlen(line[0]) - 1] == LABEL_CHAR);
-    if (!line)
+    line += (*line && **line && line[0][my_strlen(*line) - 1] == LABEL_CHAR);
+    if (!(*line) || !(**line) || **line == COMMENT_CHAR)
         return (0);
     op_index = get_op_index_by_name(line[0]);
     if (op_index == -1)

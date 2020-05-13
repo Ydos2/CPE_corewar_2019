@@ -43,7 +43,7 @@ int is_valid_asm_line(char **line)
 {
     int op_index = 0;
 
-    if (line[0][0] == COMMENT_CHAR)
+    if (!(line[0]) || !(line[0][0]) || line[0][0] == COMMENT_CHAR)
         return (1);
     if (is_valid_label(line[0])) {
         if (!line[1] || line[1][0] == COMMENT_CHAR)
