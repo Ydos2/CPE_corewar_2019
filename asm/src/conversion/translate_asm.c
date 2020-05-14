@@ -42,7 +42,7 @@ static int bin_open_stream(char *filename)
     new_filename = get_new_filename(filename);
     if (!new_filename)
         return (84);
-    fd = open(new_filename, O_WRONLY | O_TRUNC | O_CREAT);
+    fd = open(new_filename, O_WRONLY | O_TRUNC | O_CREAT, 0777);
     free(new_filename);
     return (fd);
 }
