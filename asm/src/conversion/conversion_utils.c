@@ -24,7 +24,7 @@ int *current_size(void)
 int is_exception(int op_index, int arg_index)
 {
     if (op_index == 8 || (op_index == 9 && arg_index != 2) ||
-       (op_index == 10 && arg_index != 0) || op_index == 11) {
+        (op_index == 10 && arg_index != 0) || op_index == 11) {
         return (1);
     }
     return (0);

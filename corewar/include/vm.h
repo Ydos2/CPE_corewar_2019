@@ -10,8 +10,6 @@
 
 #include "op.h"
 
-#define OBJECT_LIST 2
-
 typedef struct process
 {
     char live;

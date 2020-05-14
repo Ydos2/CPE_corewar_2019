@@ -41,6 +41,9 @@ valgrind:	fclean	all ## Launch valgrind
 	@make valgrind -C asm
 	@make valgrind -C corewar
 
+tests_run: ## Launch tests
+	@make tests_run -C corewar
+
 help: ## Help for the Makefile
 	@cat $(MAKEFILE_LIST) | sed -En 's/^([a-zA-Z_-]+)\s*:.*##\s?(.*)/\1 "\2"/p' | xargs printf "\033[32m%-30s\033[0m %s\n"
 
