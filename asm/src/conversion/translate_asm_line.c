@@ -63,7 +63,7 @@ static int write_command_arg(char *arg, label_t *labels, int exception, int fd)
 {
     size_t size = 0;
 
-    if (exception) {
+    if (exception && arg[0] != 'r') {
         if (write_index(arg, labels, fd) == 84)
             return (84);
         return (0);

@@ -13,7 +13,6 @@ static char *get_str_until(char **str, char *separators)
     char *new_str = NULL;
     int len = 0;
     char separators2[4] = {' ', ',', '\t', 0};
-    int is_comment = 0;
 
     for (; is_separator(**str, separators2); (*str)++);
     if (**str == COMMENT_CHAR)

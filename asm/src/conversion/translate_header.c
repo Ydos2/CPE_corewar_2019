@@ -21,7 +21,7 @@ static int get_arg_size(char *argument, int op_index, int arg_index)
 {
     int size = 0;
 
-    if (is_exception(op_index, arg_index))
+    if (is_exception(op_index, arg_index) && argument[0] != 'r')
         return (2);
     if (argument[0] == 'r')
         return (1);
