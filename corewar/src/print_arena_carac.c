@@ -59,7 +59,7 @@ static void print_arena(arena_t *arena, int i)
     }
 }
 
-void print_arena_carac(arena_t *arena)
+int print_arena_carac(arena_t *arena)
 {
     print_start();
     for (int i = 0, j = 1; ++i <= MEM_SIZE;) {
@@ -73,4 +73,5 @@ void print_arena_carac(arena_t *arena)
         }
     }
     print_end();
+    return (0);
 }

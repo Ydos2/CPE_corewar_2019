@@ -67,7 +67,7 @@ int my_strlen(char const *str);
 arena_t *init_arena(arena_t *arena, champion_t *champion);
 
 // print_arena_carac.c
-void print_arena_carac(arena_t *arena);
+int print_arena_carac(arena_t *arena);
 
 // champion.c
 int is_a_champion_path(char *str);
