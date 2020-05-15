@@ -12,13 +12,11 @@ static int set_prog_name(char **line, header_t *header)
     int len = 0;
     int quotes = 0;
 
-    if (line[1] && line[1][0] != COMMENT_CHAR)
-        return (84);
-    if (header->prog_name[0])
+    if (header->prog_name[0] || (line[1] && line[1][0] != COMMENT_CHAR))
         return (84);
     for (; line[0][len] && quotes < 2; len++)
         quotes += (line[0][len] == '"');
-    if (len > PROG_NAME_LENGTH || quotes != 2)
+    if (quotes != 2 || len - 2 > PROG_NAME_LENGTH)
         return (84);
     for (int i = len; line[0][i]; i++) {
         if (line[0][i] != ' ' && line[0][i] != '\t')
@@ -26,7 +24,11 @@ static int set_prog_name(char **line, header_t *header)
     }
     for (int i = 1; i < len - 1; i++)
         header->prog_name[i - 1] = line[0][i];
-    return (0);
+    for (int i = 0; header->prog_name[i]; i++) {
+        if (header->prog_name[i] != ' ' && header->prog_name[i] != '\t')
+            return (0);
+    }
+    return (84);
 }
 
 static int set_prog_comment(char **line, header_t *header)
@@ -34,13 +36,11 @@ static int set_prog_comment(char **line, header_t *header)
     int len = 0;
     int quotes = 0;
 
-    if (line[1] && line[1][0] != COMMENT_CHAR)
-        return (84);
-    if (header->comment[0])
+    if (header->comment[0] || (line[1] && line[1][0] != COMMENT_CHAR))
         return (84);
     for (; line[0][len] && quotes < 2; len++)
         quotes += (line[0][len] == '"');
-    if (len > COMMENT_LENGTH || quotes != 2)
+    if (quotes != 2 || len - 2 > COMMENT_LENGTH)
         return (84);
     for (int i = len; line[0][i]; i++) {
         if (line[0][i] != ' ' && line[0][i] != '\t')
