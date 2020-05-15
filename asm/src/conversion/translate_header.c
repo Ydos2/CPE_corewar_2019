@@ -41,7 +41,8 @@ static int get_line_size(char **line, label_t **labels, int prog_size)
     int line_size = 0;
 
     if (*line && **line && line[0][my_strlen(*line) - 1] == LABEL_CHAR) {
-        add_label(labels, prog_size, line[0]);
+        if (add_label(labels, prog_size, line[0]) == 84)
+            return (-1);
         line++;
     }
     if (!(*line) || !(**line) || **line == COMMENT_CHAR)
@@ -59,18 +60,24 @@ static int get_line_size(char **line, label_t **labels, int prog_size)
 static int get_prog_size_and_labels(char ***asm_file, label_t **labels)
 {
     int prog_size = 0;
+    int line_size = 0;
 
     *labels = get_blank_labels(asm_file);
     if (!(*labels))
         return (-1);
-    for (int i = 0; asm_file[i]; i++)
-        prog_size += get_line_size(asm_file[i], labels, prog_size);
+    for (int i = 0; asm_file[i]; i++) {
+        line_size = get_line_size(asm_file[i], labels, prog_size);
+        if (line_size == -1)
+            return (-1);
+        prog_size += line_size;
+    }
     return (prog_size);
 }
 
 int translate_header(header_t *header, char ***file, int fd, label_t **labels)
 {
     header->prog_size = get_prog_size_and_labels(file, labels);
+
     if (header->prog_size == -1)
         return (84);
     if (write_int_as_x_bytes(COREWAR_EXEC_MAGIC, 4, fd) == 84)

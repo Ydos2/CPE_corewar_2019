@@ -5,8 +5,8 @@
 #
 # Sat Nov 10 03:24;30 2081
 #
-.name "zork"
-.comment "just a basic living program"
+.name "zork" #fghjk
+.comment "just a basic living program"#fghjklm
 
 l2:
 sti r1, %:live, %1   ### kuhc

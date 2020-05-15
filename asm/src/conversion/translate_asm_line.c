@@ -34,8 +34,10 @@ static int write_index(char *arg, label_t *labels, int fd)
         index_label = get_label_index_by_name(&(arg[1]), labels);
     else
         index_label = get_nbr_until(arg, 0);
-    if (index_label == -1)
+    if (index_label == -1) {
+        write(2, "Error : negative or unknown label.\n", 35);
         return (84);
+    }
     index = index_label - (*current_size_line());
     if (index < 0)
         index = 65535 - (-index - 1);

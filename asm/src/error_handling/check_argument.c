@@ -36,8 +36,8 @@ static int check_arg_type(int op_index, args_type_t arg_type, int arg_index)
 
     valid_types = op_tab[op_index].type[arg_index];
     if ((valid_types | arg_type) != valid_types)
-        return (0);
-    return (1);
+        return (84);
+    return (0);
 }
 
 int is_valid_argument(int op_index, char *arg, int arg_index)

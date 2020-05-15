@@ -7,35 +7,47 @@
 
 #include "asm.h"
 
-static int set_prog_name(char *name, header_t *header)
+static int set_prog_name(char **line, header_t *header)
 {
     int len = 0;
+    int quotes = 0;
 
+    if (line[1] && line[1][0] != COMMENT_CHAR)
+        return (84);
     if (header->prog_name[0])
         return (84);
-    for (; name[len]; len++);
-    if (len > PROG_NAME_LENGTH)
+    for (; line[0][len] && quotes < 2; len++)
+        quotes += (line[0][len] == '"');
+    if (len > PROG_NAME_LENGTH || quotes != 2)
         return (84);
-    if (name[0] != '"' || name[len - 1] != '"')
-        return (84);
+    for (int i = len; line[0][i]; i++) {
+        if (line[0][i] != ' ' && line[0][i] != '\t')
+            return (84);
+    }
     for (int i = 1; i < len - 1; i++)
-        header->prog_name[i - 1] = name[i];
+        header->prog_name[i - 1] = line[0][i];
     return (0);
 }
 
-static int set_prog_comment(char *comment, header_t *header)
+static int set_prog_comment(char **line, header_t *header)
 {
     int len = 0;
+    int quotes = 0;
 
+    if (line[1] && line[1][0] != COMMENT_CHAR)
+        return (84);
     if (header->comment[0])
         return (84);
-    for (; comment[len]; len++);
-    if (len > COMMENT_LENGTH)
+    for (; line[0][len] && quotes < 2; len++)
+        quotes += (line[0][len] == '"');
+    if (len > COMMENT_LENGTH || quotes != 2)
         return (84);
-    if (comment[0] != '"' || comment[len - 1] != '"')
-        return (84);
+    for (int i = len; line[0][i]; i++) {
+        if (line[0][i] != ' ' && line[0][i] != '\t')
+            return (84);
+    }
     for (int i = 1; i < len - 1; i++)
-        header->comment[i - 1] = comment[i];
+        header->comment[i - 1] = line[0][i];
     return (0);
 }
 
@@ -51,9 +63,9 @@ static int is_valid_header(header_t *header, char ***asm_file, int *i)
         if (!(line[0]) || !(line[0][0]) || line[0][0] == COMMENT_CHAR)
             continue;
         if (my_strcmp(".name", line[0]) == 0)
-            return_val = (line[2]) ? 84 : set_prog_name(line[1], header);
+            return_val = set_prog_name(&(line[1]), header);
         else if (my_strcmp(".comment", line[0]) == 0)
-            return_val = (line[2]) ? 84 : set_prog_comment(line[1], header);
+            return_val = set_prog_comment(&(line[1]), header);
         else
             return (0);
         if (return_val == 84)
