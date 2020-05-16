@@ -1,0 +1,74 @@
+,Case,Topic,Test,Result
+,Error,File,Empty file,OK
+,,,Only comments in file,OK
+,,,Only line breaks in file,OK
+,,,Only spaces in file,OK
+,,,"Only comments, line breaks and spaces in file",OK
+,,,Missing reading permissions,OK
+,,Header,Multiple .name,OK
+,,,Multiple .comment,OK
+,,,Too long comment,OK
+,,,Too long name,OK
+,,,Something (not a comment or whitespaces) after .name,OK
+,,,Something (not a comment or whitespaces) after .comment,OK
+,,,Missing .name,OK
+,,,Missing .comment,OK
+,,,Empty .name,OK
+,,,.name containing only spaces or tabs,OK
+,,,Empty .comment,OK
+,,,Missing opening quotes for .name,OK
+,,,Missing closing quotes for .name,OK
+,,,Missing opening quotes for .comment,OK
+,,,Missing closing quotes for .comment,OK
+,,"
+Code : separators",No space after command name,OK
+,,,No space after label name,OK
+,,,No comma after first arguments,KO
+,,,Comma after last argument,OK
+,,,Several commas bewteen arguments,KO
+,,Code : values,Register not bewteen 1 and 16,OK
+,,,Invalid int as direct,OK
+,,,Invalid int as indirect,OK
+,,,Invalid label name (not only label_chars),OK
+,,,Invalid label call (not only label_chars),OK
+,,Code : logic,Calling an unknown label,OK
+,,,Defining a label twice,OK
+,,,Unknown command,OK
+,,,No argument for a command,OK
+,,,No command name for a command,OK
+,,,Not enough argument for a command,OK
+,,,Too many arguments for a command,OK
+,,,Wrong types of arguments for a command,OK
+,,,Arguments not in the right order,OK
+,,,,
+,No error,Comments,Whole line is a comment : beginning of the file,OK
+,,,Whole line is a comment : between .name and .comment,OK
+,,,Whole line is a comment : between header and code,OK
+,,,Whole line is a comment : between two lines of code,OK
+,,,Whole line is a comment : end of the file,OK
+,,,Comment at the end of a line : after .name,OK
+,,,Comment at the end of a line : after .comment,OK
+,,,Comment at the end of a line : after a line of code,OK
+,,,Invalid command commented,OK
+,,,Second .name commented,OK
+,,Empty lines,Empty line : beginning of the file,OK
+,,,Empty line : between .name and .comment,OK
+,,,Empty line : between header and code,OK
+,,,Empty line : between two lines of code,OK
+,,,Empty line : end of the file,OK
+,,Only white spaces on a line,Beginning of the file,OK
+,,,Between .name and .comment,OK
+,,,Between header and code,OK
+,,,Between two lines of code,OK
+,,,End of the file,OK
+,,Indentation,Spaces before .name,OK
+,,,Spaces before .comment,OK
+,,,Spaces before comment,OK
+,,,Spaces before command,OK
+,,,Spaces before label,OK
+,,,Spaces before argument,OK
+,,,Tabs before .name,OK
+,,,Tabs before .comment,OK
+,,,Tabs before comment,OK
+,,,Tabs before command,OK
+,,,Tabs before label,OK
