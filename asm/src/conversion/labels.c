@@ -36,13 +36,18 @@ label_t *get_blank_labels(char ***asm_file)
     return (labels);
 }
 
-void add_label(label_t **labels, int index, char *line)
+int add_label(label_t **labels, int index, char *line)
 {
     int end = 0;
 
+    if (get_label_index_by_name(line, *labels) != -1) {
+        write(2, "Error : multiple definition of a label.\n", 40);
+        return (84);
+    }
     for (; (*labels)[end].name; end++);
     (*labels)[end].index = index;
     (*labels)[end].name = line;
+    return (0);
 }
 
 int get_label_index_by_name(char *name, label_t *labels)

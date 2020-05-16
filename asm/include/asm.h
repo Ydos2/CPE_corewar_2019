@@ -78,7 +78,7 @@ int write_int_as_x_bytes(long data, size_t size, int fd);
 
 // labels.c
 label_t *get_blank_labels(char ***asm_file);
-void add_label(label_t **labels, int index, char *line);
+int add_label(label_t **labels, int index, char *line);
 int get_label_index_by_name(char *name, label_t *labels);
 
 #endif /* !ASM_H_ */
