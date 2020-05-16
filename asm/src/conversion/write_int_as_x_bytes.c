@@ -29,7 +29,7 @@ int write_int_as_x_bytes(long nbr, size_t size, int fd)
     long byte_as_long = 0;
     unsigned char byte = 0;
 
-    for (int i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; i++) {
         byte_as_long = nbr % x_to_the_power_of_y(16, (size - i) * 2);
         byte_as_long /= x_to_the_power_of_y(16, (size - i - 1) * 2);
         byte = (unsigned char)byte_as_long;
