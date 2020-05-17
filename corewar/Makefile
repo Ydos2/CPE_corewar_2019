@@ -110,7 +110,7 @@ tests_run: fclean $(OBJ) $(MAIN_OBJ) $(OBJ_TESTS)
 	@printf "\e[1;32mFinished compiling sources\e[0m\n"
 	@$(CC) $(CFLAGS) $(OBJ) $(MAIN_OBJ) $(OBJ_TESTS) -o $(TEST_TARGET) $(TEST_LFLAGS)
 	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Tests the code ▄▀▄▀▄▀\e[0m\n"
-	@./$(TEST_TARGET) ../bonus/42.cor ../bonus/abel.cor ../bonus/bill.cor
+	@./$(TEST_TARGET) ../bonus/tests/scripts/reference_cor_files/42.cor ../bonus/tests/scripts/reference_cor_files/abel.cor ../bonus/tests/scripts/reference_cor_files/bill.cor
 	@gcovr --exclude tests/
 	@gcovr -b
 
